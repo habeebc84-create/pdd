@@ -1,9 +1,21 @@
-node_modules/
-dist/
+# Secrets
 .env
+.env.*
+!.env.example
+
+# Frontend
+node_modules/
+frontend/dist/
+
+# Python
 __pycache__/
 *.py[cod]
-*$py.class
-venv/
+.pytest_cache/
 .venv/
+venv/
+
+# IDEs and operating systems
 .vscode/
+.idea/
+.DS_Store
+Thumbs.db

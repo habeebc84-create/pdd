@@ -1,21 +1,17 @@
 from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
 
-app = FastAPI(title="ReturnRoute API")
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+app = FastAPI(
+    title="ReturnRoute API",
+    description="Passenger and parcel return-trip matching",
+    version="0.1.0",
 )
 
-@app.get("/health")
-async def health_check():
-    return {"status": "healthy", "message": "ReturnRoute API is running"}
 
-@app.get("/")
-async def root():
-    return {"message": "Welcome to ReturnRoute API. Visit /docs for documentation."}
+@app.get("/health")
+def health_check():
+    return {
+        "status": "ok",
+        "application": "ReturnRoute",
+        "version": "0.1.0",
+    }
 

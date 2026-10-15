@@ -1,38 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { AppLayout } from './components/layout/Layout';
+import { LandingPage } from './pages/LandingPage';
+import { Dashboard } from './pages/Dashboard';
+import { RidesPage } from './pages/RidesPage';
+import { ParcelsPage } from './pages/ParcelsPage';
+import { HowItWorksPage } from './pages/HowItWorksPage';
 
-function App() {
-  const [status, setStatus] = useState("Checking backend...");
-
-  useEffect(() => {
-    fetch("http://127.0.0.1:8000/health")
-      .then((res) => res.json())
-      .then((data) => setStatus(data.message))
-      .catch(() => setStatus("Backend is offline"));
-  }, []);
-
+const App = () => {
   return (
-    <div style={{ 
-      fontFamily: "sans-serif", 
-      display: "flex", 
-      flexDirection: "column", 
-      alignItems: "center", 
-      justifyContent: "center", 
-      height: "100vh",
-      backgroundColor: "#f0f2f5"
-    }}>
-      <h1>ReturnRoute Project</h1>
-      <div style={{ 
-        padding: "20px", 
-        borderRadius: "8px", 
-        backgroundColor: "white", 
-        boxShadow: "0 2px 4px rgba(0,0,0,0.1)" 
-      }}>
-        <strong>Backend Status:</strong> {status}
-      </div>
-      <p style={{ marginTop: "20px" }}>The foundation is now built.</p>
-    </div>
+    <BrowserRouter>
+      <AppLayout>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/rides" element={<RidesPage />} />
+          <Route path="/parcels" element={<ParcelsPage />} />
+          <Route path="/how-it-works" element={<HowItWorksPage />} />
+          <Route path="*" element={<div className="py-20 text-center"><h1>404 - Page Not Found</h1><p>The route you are looking for doesn't exist.</p></div>} />
+        </Routes>
+      </AppLayout>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;
-
